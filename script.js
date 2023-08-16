@@ -149,7 +149,7 @@ window.addEventListener('wheel', function(e) {
 window.addEventListener("wheel", function(event){
     var delta = Math.sign(event.deltaY); // Определяем направление прокрутки
 
-    zoom += delta / 5;
+    zoom -= delta / 10;
 
     zoom = Math.min(Math.max(zoom, 0.05), 2);
 
