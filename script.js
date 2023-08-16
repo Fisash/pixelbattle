@@ -130,6 +130,9 @@ document.addEventListener('keydown', function (event) {
         if(zoom >= 16) return;
         zoom += 0.05
     }
+    else{
+        return;
+    }
 
     // обновление экрана щоби не было багов 
     ctx.fillStyle = 'white';
