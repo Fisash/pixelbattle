@@ -124,8 +124,8 @@ canvas.addEventListener('click', function(event) {
 
 document.addEventListener('keydown', function (event) {
     if (event.key === '=') {
-        if(zoom <= 0.1) return;
-        zoom -= 0.05
+        if(zoom <= 0.02) return;
+        zoom -= 0.02
     } else if (event.key === '-') {
         if(zoom >= 2) return;
         zoom += 0.05
@@ -148,7 +148,7 @@ window.addEventListener("wheel", function(event){
 
     zoom += delta / 10;
 
-    zoom = Math.min(Math.max(zoom, 0.1), 2);
+    zoom = Math.min(Math.max(zoom, 0.02), 2);
 
     // обновление экрана щоби не было багов 
     
