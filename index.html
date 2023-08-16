@@ -1,0 +1,95 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <style>
+
+            .square-row {
+                display: flex;
+            }
+
+            .square {
+                width: 50px;
+                height: 50px;
+                 margin: 5px;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: transform 0.3s ease-in-out;
+            }
+
+            .square.selected {
+                transform: scale(1.1);
+            }
+
+            #canvasContainer {
+                white-space: nowrap;
+                display: flex;
+                position: relative;
+            }
+    
+            #highlight {
+                position: absolute;
+                pointer-events: none;
+                border: 4px solid red;
+                box-sizing: border-box;
+            }
+            #infoPanel {
+                background-color: rgb(205, 205, 230);
+                width: 300px; /* Установите желаемую ширину панельки */
+                height: 1000px;
+                border-radius: 10px;
+                position: sticky;
+                top: 0;
+                left: 100%;
+                transform: translateX(-100%);
+            }
+            #myCanvas{
+                display: inline-block;
+            }
+            .text{
+                font-size: 80px;
+                color: rgb(0, 0, 0);
+                font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+            }
+            .littleText{
+                font-size: 28px;
+                color: rgb(56, 74, 97);
+                font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+            }
+        </style>
+
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+        <title>Pixel Battle</title>
+    </head>
+    <body>
+
+        <div id="canvasContainer">
+            <canvas id="myCanvas" width="8192" height="8192"></canvas>
+
+            <div id = "infoPanel">
+                <p class="text">Pixel Battle</p>
+                <p class="littleText">by fisash & holu31</p>
+                <br>
+                <p class="littleText">Choose a color</p>
+
+                <div class="square-row">
+                    <div class = "square" style="background-color: rgb(245, 80, 80);"  data-color="2" ></div>
+                    <div class = "square" style="background-color: rgb(42, 83, 172);" data-color="3"></div>
+                    <div class = "square" style="background-color: rgb(230, 210, 101);" data-color="4"></div>
+                    <div class = "square" style="background-color: rgb(93, 189, 117);" data-color="5"></div>
+                    <div class = "square" style="background-color: black;" data-color="1" ></div>
+                    <div class = "square" style="background-color: white;" data-color="0" ></div>
+                </div>
+            </div>
+
+            <div id="highlight"></div>
+        </div>
+
+        <script src="script.js"></script>
+
+    </body>
+    </html>
