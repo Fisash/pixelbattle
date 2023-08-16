@@ -124,7 +124,7 @@ canvas.addEventListener('click', function(event) {
 
 document.addEventListener('keydown', function (event) {
     if (event.key === '=') {
-        if(zoom <= 1) return;
+        if(zoom <= 0.2) return;
         zoom -= 0.1
     } else if (event.key === '-') {
         if(zoom >= 2) return;
@@ -146,9 +146,9 @@ window.addEventListener('wheel', function(e) {
 window.addEventListener("wheel", function(event){
     var delta = Math.sign(event.deltaY); // Определяем направление прокрутки
 
-    zoom += delta / 10;
+    zoom += delta / 12;
 
-    zoom = Math.min(Math.max(zoom, 0.5), 4);
+    zoom = Math.min(Math.max(zoom, 0.2), 2);
 
     // обновление экрана щоби не было багов 
     
