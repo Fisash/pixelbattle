@@ -9,7 +9,7 @@ var canvasHeight = 512 * 32;
 
 var blockSize = 32; // Размер одного блока
 
-var zoom = 1;
+var zoom = 0.3;
 
 
 function getColor(a) {
@@ -54,7 +54,7 @@ function border_draw(){
 
 
 function renderMap(mapData) {
-    var blockSize = Math.round(32 / zoom);
+    var blockSize = Math.round(32 * zoom);
     var map = mapData.map;
 
     for (var y = 0; y < map.length; y++) {
@@ -81,7 +81,7 @@ setInterval(updateMap, 1000);
 canvas.addEventListener('mousemove', function(event) {
     var x = event.offsetX;
     var y = event.offsetY;
-    var blockSize = Math.round(32 / zoom);
+    var blockSize = Math.round(32 * zoom);
 
     // Проверяем, находится ли курсор внутри холста
     if (x >= 0 && x < canvasWidth / zoom && y >= 0 && y < canvasHeight / zoom) {
@@ -101,7 +101,7 @@ canvas.addEventListener('mousemove', function(event) {
 canvas.addEventListener('click', function(event) {
     var x = event.offsetX;
     var y = event.offsetY;
-    var blockSize = Math.round(32 / zoom);
+    var blockSize = Math.round(32 * zoom);
 
     var blockX = Math.floor(x / blockSize) * blockSize;
     var blockY = Math.floor(y / blockSize) * blockSize;
@@ -124,10 +124,10 @@ canvas.addEventListener('click', function(event) {
 
 document.addEventListener('keydown', function (event) {
     if (event.key === '=') {
-        if(zoom <= 0.5) return;
+        if(zoom <= 0.05) return;
         zoom -= 0.05
     } else if (event.key === '-') {
-        if(zoom >= 16) return;
+        if(zoom >= 2) return;
         zoom += 0.05
     }
     else{
@@ -149,9 +149,9 @@ window.addEventListener('wheel', function(e) {
 window.addEventListener("wheel", function(event){
     var delta = Math.sign(event.deltaY); // Определяем направление прокрутки
 
-    zoom += delta / 10;
+    zoom += delta / 5;
 
-    zoom = Math.min(Math.max(zoom, 0.5), 16);
+    zoom = Math.min(Math.max(zoom, 0.05), 2);
 
     // обновление экрана щоби не было багов 
     
