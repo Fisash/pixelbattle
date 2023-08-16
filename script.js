@@ -109,7 +109,7 @@ canvas.addEventListener('click', function(event) {
     var currentColor = ctx.getImageData(blockX, blockY, blockSize, blockSize).data;
 
     var color = colorValue;
-
+    ctx.fillStyle = getColor(color);
     ctx.fillRect(blockX, blockY, blockSize, blockSize);
     
     $.post("https://holu31.pythonanywhere.com/setpixel", { color:color, x: blockX/blockSize, y: blockY/blockSize }, 
