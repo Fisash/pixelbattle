@@ -4,10 +4,10 @@ var highlight = document.getElementById('highlight');
 
 var ctx = canvas.getContext('2d');
 
-var canvasWidth = 8192;
-var canvasHeight = 8192;
+var canvasWidth = 512 * 32;
+var canvasHeight = 512 * 32;
 
-var blockSize = 16; // Размер одного блока
+var blockSize = 32; // Размер одного блока
 
 var zoom = 1;
 
@@ -109,7 +109,7 @@ canvas.addEventListener('click', function(event) {
     var currentColor = ctx.getImageData(blockX, blockY, blockSize, blockSize).data;
 
     var color = colorValue;
-    ctx.fillStyle = getColor(color);
+
     ctx.fillRect(blockX, blockY, blockSize, blockSize);
     
     $.post("https://holu31.pythonanywhere.com/setpixel", { color:color, x: blockX/blockSize, y: blockY/blockSize }, 
@@ -148,7 +148,7 @@ window.addEventListener("wheel", function(event){
 
     zoom += delta / 10;
 
-    zoom = Math.min(Math.max(zoom, 1), 2);
+    zoom = Math.min(Math.max(zoom, 0.5), 4);
 
     // обновление экрана щоби не было багов 
     
