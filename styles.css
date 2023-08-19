@@ -23,7 +23,7 @@
 #highlight {
     position: absolute;
     pointer-events: none;
-    border: 2px solid red;
+    border: 1px solid red;
     box-sizing: border-box;
 }
 #infoPanel{
@@ -35,16 +35,31 @@
     border-radius: 10px;
     position: absolute;
 }
+
+/* Стили для мобильных устройств */
+@media (max-width: 768px) { /* Примерная ширина для перехода на мобильный дизайн */
+    #infoPanel {
+      width: 100%; /* Занимаем всю ширину на мобильных устройствах */
+      height: 300px; /* Высота панели на мобильных устройствах */
+      bottom: 0; /* Позиционируем снизу */
+      top: auto; /* Снимаем верхний отступ */
+    }
+  }
+
 #myCanvas{
     display: block;
+    width: 100%;
+    height: 100%;
 }
 .text{
-    font-size: 40px;
+    font-size: 30px;
     color: rgb(0, 0, 0);
+    padding: 0;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 .littleText{
-    font-size: 20px;
+    padding: 0;
+    font-size: 18px;
     color: rgb(56, 74, 97);
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
