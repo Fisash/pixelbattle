@@ -11,6 +11,8 @@ var blockSize = 32; // Размер одного блока
 
 var zoom = 0.25;
 
+var offsetX = 0;
+var offsetY = 0;
 
 function getColor(a) {
     const colors = [
@@ -20,10 +22,16 @@ function getColor(a) {
       "rgb(42, 83, 172)",
       "rgb(230, 210, 101)",
       "rgb(93, 189, 117)",
+      "rgb(141, 82, 196)",
+      "rgb(103, 112, 131)",
+      "rgb(231, 157, 46)",
+      "rgb(40, 113, 131)",
+      "rgb(255, 187, 235)",
+      "rgb(80, 58, 53)",
     ];
   
     // Приведем число 'a' к диапазону от 0 до 5
-    const index = Math.min(Math.max(Math.floor(a), 0), 5);
+    const index = Math.min(Math.max(Math.floor(a), 0), 11);
   
     return colors[index];
 }
@@ -40,28 +48,39 @@ squares.forEach(square => {
   });
 });
 
+
+
+const ruleButtons = document.querySelectorAll('.square_rule');
+
+ruleButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    ruleValue = button.getAttribute('data-rule');
+    console.log(ruleValue);
+    ruleAction(ruleValue);
+  });
+});
+
 function border_draw(){
      // Добавляем границы черного цвета вокруг всего холста
     ctx.fillStyle = 'black';
-    ctx.fillRect(0, 0, canvasWidth / zoom, 1); // Верхняя граница
-    ctx.fillRect(0, canvasHeight / zoom - 1, canvasWidth / zoom, 1); // Нижняя граница
-    ctx.fillRect(0, 0, 1, canvasHeight / zoom); // Левая граница
-    ctx.fillRect(canvasWidth / zoom - 1, 0, 1, canvasHeight / zoom); // Правая граница
+    ctx.fillRect(0, 0, canvasWidth * zoom, 1); // Верхняя граница
+    ctx.fillRect(0, canvasHeight * zoom - 1, canvasWidth * zoom, 1); // Нижняя граница
+    ctx.fillRect(0, 0, 1, canvasHeight * zoom); // Левая граница
+    ctx.fillRect(canvasWidth * zoom - 1, 0, 1, canvasHeight * zoom); // Правая граница
 
     ctx.fillStyle = 'white';
     ctx.fillRect(1, 1, canvasWidth / zoom - 2, canvasHeight / zoom - 2); // Заполняем область внутри границ белым цветом
 }
 
 
-function renderMap(mapData) {
+function renderMap(mapData = lastmap) {
     var blockSize = Math.round(32 * zoom);
     var map = mapData.map;
-
     for (var y = 0; y < map.length; y++) {
         for (var x = 0; x < map[y].length; x++) {
             var color = getColor(map[y][x]);
             ctx.fillStyle = color;
-            ctx.fillRect(x * blockSize, y * blockSize, blockSize, blockSize);
+            ctx.fillRect((x-offsetX) * blockSize, (y-offsetY) * blockSize, blockSize, blockSize);
         }
     }
 }
@@ -85,7 +104,7 @@ canvas.addEventListener('mousemove', function(event) {
 
     // Проверяем, находится ли курсор внутри холста
     if (x >= 0 && x < canvasWidth / zoom && y >= 0 && y < canvasHeight / zoom) {
-        var blockX = Math.floor(x / blockSize) * blockSize;
+        var blockX = Math.floor(x / blockSize) * blockSize + canvas.getBoundingClientRect().left - 8;
         var blockY = Math.floor(y / blockSize) * blockSize;
 
         highlight.style.left = blockX + 'px';
@@ -106,13 +125,11 @@ canvas.addEventListener('click', function(event) {
     var blockX = Math.floor(x / blockSize) * blockSize;
     var blockY = Math.floor(y / blockSize) * blockSize;
 
-    var currentColor = ctx.getImageData(blockX, blockY, blockSize, blockSize).data;
-
     var color = colorValue;
     ctx.fillStyle = getColor(color);
     ctx.fillRect(blockX, blockY, blockSize, blockSize);
     
-    $.post("https://fisashqqq.pythonanywhere.com/setpixel", { color:color, x: blockX/blockSize, y: blockY/blockSize }, 
+    $.post("https://fisashqqq.pythonanywhere.com/setpixel", { color:color, x: blockX/blockSize + offsetX, y: blockY/blockSize + offsetY}, 
     function(data){
         console.log(data);
         console.log(color);
@@ -122,15 +139,30 @@ canvas.addEventListener('click', function(event) {
     
 });
 
-document.addEventListener('keydown', function (event) {
-    if (event.key === '=') {
+function ruleAction(action){
+    if (action === '=') {
         zoom += 0.05
-    } else if (event.key === '-') {
+    } else if (action === '-') {
         zoom -= 0.05
+    }
+    else if (action === 'd' || action === 'в') {
+        offsetX += 15
+    }
+    else if (action === 'a' || action === 'ф') {
+        offsetX -= 15
+    }
+    else if (action === 'w' || action === 'ц') {
+        offsetY -= 15
+    }
+    else if (action=== 's' || action === 'ы') {
+        offsetY += 15
     }
     else{
         return;
     }
+    
+    offsetX = Math.min(Math.max(offsetX, 0), 512)
+    offsetY = Math.min(Math.max(offsetY, 0), 512)
 
     zoom = Math.min(Math.max(zoom, 0.05), 2);
 
@@ -140,6 +172,9 @@ document.addEventListener('keydown', function (event) {
 
     updateMap();
     border_draw();
+}
+document.addEventListener('keydown', function (event) {
+   ruleAction(event.key);
 });
 
 window.addEventListener('wheel', function(e) {
