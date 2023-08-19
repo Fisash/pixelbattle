@@ -1,11 +1,12 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
+
         <link rel="stylesheet" type="text/css" href="styles.css">
+
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 
         <title>Pixel Battle</title>
@@ -13,6 +14,7 @@
     <body>
 
         <div id="canvasContainer">
+
             <canvas id="myCanvas" width="1024" height="1024"></canvas>
 
             <div id = "infoPanel">
@@ -28,6 +30,26 @@
                     <div class = "square" style="background-color: rgb(93, 189, 117);" data-color="5"></div>
                     <div class = "square" style="background-color: black;" data-color="1" ></div>
                     <div class = "square" style="background-color: white;" data-color="0" ></div>
+                </div>
+                <div class="square-row">
+                    <div class = "square" style="background-color: rgb(141, 82, 196);"  data-color="6" ></div>
+                    <div class = "square" style="background-color: rgb(103, 112, 131);" data-color="7"></div>
+                    <div class = "square" style="background-color: rgb(231, 157, 46);" data-color="8"></div>
+                    <div class = "square" style="background-color: rgb(40, 113, 131);" data-color="9"></div>
+                    <div class = "square" style="background-color: rgb(255, 187, 235);" data-color="10" ></div>
+                    <div class = "square" style="background-color: rgb(80, 58, 53);" data-color="11" ></div>
+                </div>
+
+                <div class="square-row">
+                    <div class = "square_rule"  style="background-color: rgb(255, 255, 255);" data-rule="+" >+</div>
+                    <div class = "square_rule"  style="background-color: rgb(255, 255, 255);" data-rule="w" >↑</div>
+                    <div class = "square_rule"  style="background-color: rgb(255, 255, 255);" data-rule="-" >-</div>
+                </div>
+
+                <div class="square-row">
+                    <div class = "square_rule"  style="background-color: rgb(255, 255, 255);" data-rule="a" >←</div>
+                    <div class = "square_rule"  style="background-color: rgb(255, 255, 255);" data-rule="s" >↓</div>
+                    <div class = "square_rule"  style="background-color: rgb(255, 255, 255);" data-rule="d" >→</div>
                 </div>
             </div>
 
