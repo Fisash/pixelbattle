@@ -9,7 +9,7 @@ var canvasHeight = 512 * 32;
 
 var blockSize = 32; // Размер одного блока
 
-var zoom = 0.1;
+var zoom = 0.25;
 
 
 function getColor(a) {
