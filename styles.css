@@ -1,6 +1,9 @@
 .square-row {
     display: flex;
 }
+body{
+    background-color:  rgb(70, 70, 124);
+}
 
 .square {
     width: 32px;
@@ -10,12 +13,23 @@
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
 }
+.square_rule{
+    width: 30px;
+    height: 30px;
+    margin: 3px;
+    border-radius: 5px;
+    cursor: pointer;
 
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
 .square.selected {
     transform: scale(1.1);
 }
 
 #canvasContainer {
+    background-color: rgb(180, 180, 214);
     height: 100%;
     position: relative;
 }
@@ -23,43 +37,44 @@
 #highlight {
     position: absolute;
     pointer-events: none;
-    border: 1px solid red;
+    border: 2px solid red;
     box-sizing: border-box;
 }
 #infoPanel{
-    background-color: rgb(205, 205, 230);
-    top: 0;
+    background-color: rgb(180, 180, 214);
+    bottom: 0;
     right: 0;
-    width: 250px;
+    width: 300px;
     height: 100%;
     border-radius: 10px;
     position: absolute;
 }
-
-/* Стили для мобильных устройств */
-@media (max-width: 768px) { /* Примерная ширина для перехода на мобильный дизайн */
-    #infoPanel {
-      width: 100%; /* Занимаем всю ширину на мобильных устройствах */
-      height: 300px; /* Высота панели на мобильных устройствах */
-      bottom: 0; /* Позиционируем снизу */
-      top: auto; /* Снимаем верхний отступ */
-    }
-  }
-
 #myCanvas{
+    margin: auto;
     display: block;
-    width: 100%;
-    height: 100%;
 }
 .text{
-    font-size: 30px;
+    font-size: 40px;
+    margin: auto;
     color: rgb(0, 0, 0);
-    padding: 0;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 .littleText{
-    padding: 0;
-    font-size: 18px;
+    margin: auto;
+    font-size: 20px;
     color: rgb(56, 74, 97);
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
+
+@media (max-width: 768px) { /* Примерная ширина для перехода на мобильный дизайн */
+    #canvasContainer {
+      flex-direction: column; /* Меняем направление для мобильных устройств */
+    }
+  
+    #infoPanel{
+      width: 100%; /* Занимаем всю ширину на мобильных устройствах */
+      height: 350px; /* Высота панели на мобильных устройствах */
+      position: absolute;
+      bottom: 0;
+    }
+  }
