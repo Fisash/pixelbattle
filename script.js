@@ -68,7 +68,7 @@ function renderMap(mapData) {
 
 function updateMap()
 {
-    $.get("http://fisashqqq.pythonanywhere.com/get_map", function(data, status){
+    $.get("https://fisashqqq.pythonanywhere.com/get_map", function(data, status){
         let map = data;
         renderMap(map);
         });
@@ -112,7 +112,7 @@ canvas.addEventListener('click', function(event) {
     ctx.fillStyle = getColor(color);
     ctx.fillRect(blockX, blockY, blockSize, blockSize);
     
-    $.post("http://fisashqqq.pythonanywhere.com/setpixel", { color:color, x: blockX/blockSize, y: blockY/blockSize }, 
+    $.post("https://fisashqqq.pythonanywhere.com/setpixel", { color:color, x: blockX/blockSize, y: blockY/blockSize }, 
     function(data){
         console.log(data);
         console.log(color);
