@@ -14,6 +14,8 @@ var zoom = 0.25;
 var offsetX = 0;
 var offsetY = 0;
 
+let map = []
+
 function getColor(a) {
     const colors = [
       "white",
@@ -88,7 +90,7 @@ function renderMap(mapData = lastmap) {
 function updateMap()
 {
     $.get("https://fisashqqq.pythonanywhere.com/get_map", function(data, status){
-        let map = data;
+        map = data;
         renderMap(map);
         });
         
@@ -170,7 +172,8 @@ function ruleAction(action){
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    updateMap();
+    //updateMap();
+    renderMap(map);
     border_draw();
 }
 document.addEventListener('keydown', function (event) {
@@ -193,6 +196,7 @@ window.addEventListener("wheel", function(event){
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    updateMap();
+    //updateMap();
+    renderMap(map);
     border_draw();
 });
