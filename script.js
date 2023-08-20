@@ -76,6 +76,7 @@ function border_draw(){
 
 
 function renderMap(mapData = lastmap) {
+    console.log("Начало отрисовки карты");
     var blockSize = Math.round(32 * zoom);
     var map = mapData.map;
     for (var y = 0; y < map.length; y++) {
@@ -85,6 +86,7 @@ function renderMap(mapData = lastmap) {
             ctx.fillRect((x-offsetX) * blockSize, (y-offsetY) * blockSize, blockSize, blockSize);
         }
     }
+    console.log("Конец отрисовки карты");
 }
 
 function updateMap()
